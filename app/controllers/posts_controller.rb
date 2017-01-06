@@ -23,6 +23,29 @@ class PostsController < ApplicationController
 		
 	end
 
+
+
+	def edit
+		@group = Group.find(params[:group_id])
+		@post = Post.find(params[:id])
+	end
+
+	def update
+		@group = Group.find(params[:group_id])
+		@post = Post.find(params[:id])
+
+		if @post.update(post_params)
+			# redirect_to group_path(@group), notice: "Update Success"
+			redirect_to account_post_path, notice: "Update Success"
+		else
+			render :edit
+			
+		end
+		
+	end
+
+
+
 private
 def post_params
 	params.require(:post).permit(:content)
